@@ -1,0 +1,15 @@
+*{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body{
+  background-color: #71ec;
+}
+
+#container {
+  justify-content: center;
+}
+
+#states {
+  margin-top: 25%;
+}
+

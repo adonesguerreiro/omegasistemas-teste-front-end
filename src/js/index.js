@@ -16,7 +16,8 @@ function stateSearch() {
   request
     .then((res) => {
       var optionData = `<option value="" selected>Selecione um estado</option>`;
-
+      var optionAll = `<option value="todos">Todos</option>`;
+      optionData += optionAll;
       optionData += res.map((states) => {
         return `<option value=${states.sigla}>${states.nome}</option>`;
       });
@@ -26,8 +27,10 @@ function stateSearch() {
 
       optionState.addEventListener("change", function (e) {
         e.preventDefault();
-        if (optionState != "") {
+        if (optionState.value != "" && optionState.value != "todos") {
           covidStateSearch(optionState.value);
+        } else if (optionState.value === "todos") {
+          covidStateSearchStatus();
         }
       });
     })
@@ -42,6 +45,7 @@ function covidStateSearch(state) {
 
   request
     .then((res) => {
+      console.log(res);
       console.log("Casos: " + res.cases.toLocaleString("pt-BR"));
       console.log("Mortes: " + res.deaths.toLocaleString("pt-BR"));
       console.log("Suspeitos: " + res.suspects.toLocaleString("pt-BR"));
@@ -52,6 +56,28 @@ function covidStateSearch(state) {
     });
 }
 
+function covidStateSearchStatus() {
+  var url = `https://covid19-brazil-api.now.sh/api/report/v1/`;
+  const request = requestApi(url);
+  var data;
+  request.then((res) => {
+    data = res.data.map((status) => {
+      var dataList = [{
+         "uf":status.uf,
+         "state": status.state.toLocaleString("pt-BR"),
+         "cases": status.cases.toLocaleString("pt-BR"),
+         "deaths": status.deaths.toLocaleString("pt-BR"),
+         "suspects": status.suspects.toLocaleString("pt-BR"),
+         "date": convertDateTime(status.datetime)
+      }]
+      return console.log(dataList);
+    })
+     
+  }).catch(function (error){
+    console.log(error);
+  });
+}
+
 function convertDateTime(date) {
   var data = new Date(date);
   var day = data.getDate().toString();
@@ -59,15 +85,25 @@ function convertDateTime(date) {
   var month = data.getMonth().toString() + 1;
   var monthRes = month.length === 1 ? "0" + month : month;
 
-  var seconds = data.getSeconds();
+  var seconds = data.getSeconds().toString();
+  var secondsRes = seconds.length === 1 ? "0" + seconds : seconds;
   var minutes = data.getMinutes().toString();
-  var minutesRes = minutes.length === 1 ? "0" + minutes: minutes; 
+  var minutesRes = minutes.length === 1 ? "0" + minutes : minutes;
   var hour = data.getHours();
 
   var year = data.getFullYear();
-  data = dayRes + "/" + monthRes + "/" + year  + " as " + hour + ":" + minutesRes + ":" + seconds; 
+  data =
+    dayRes +
+    "/" +
+    monthRes +
+    "/" +
+    year +
+    " as " +
+    hour +
+    ":" +
+    minutesRes +
+    ":" +
+    secondsRes;
 
   return data;
 }
-
-
