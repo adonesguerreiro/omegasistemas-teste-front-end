@@ -16,12 +16,12 @@ function stateSearch() {
   request
     .then((res) => {
       var optionData = `<option value="" selected>Selecione um estado</option>`;
-      var optionAll = `<option value="todos">Todos</option>`;
-      optionData += optionAll;
       optionData += res.map((states) => {
         return `<option value=${states.sigla}>${states.nome}</option>`;
       });
 
+      var optionAll = `<option value="todos">Listar o estado com maior numeros de casos, mortes e suspeitos</option>`;
+      optionData += optionAll;
       var optionState = document.querySelector("#states");
       optionState.innerHTML = optionData;
 
@@ -60,22 +60,30 @@ function covidStateSearchStatus() {
   var url = `https://covid19-brazil-api.now.sh/api/report/v1/`;
   const request = requestApi(url);
   var data;
-  request.then((res) => {
-    data = res.data.map((status) => {
-      var dataStatus = [{
-         "uf":status.uf,
-         "state": status.state.toLocaleString("pt-BR"),
-         "cases": status.cases.toLocaleString("pt-BR"),
-         "deaths": status.deaths.toLocaleString("pt-BR"),
-         "suspects": status.suspects.toLocaleString("pt-BR"),
-         "date": convertDateTime(status.datetime)
-      }]
-      return console.log(dataStatus);
-    })
+  request
+    .then((res) => {
+      data = res.data.map((status) => {
+        var dataStatus = [
+          {
+            
+            state: status.state,
+            cases: status.cases,
+            deaths: status.deaths,
+            suspects: status.suspects,
+            uid: status.uid,
+            uf: status.uf,
+          },
+        ]
      
-  }).catch(function (error){
-    console.log(error);
-  });
+        return console.log(dataStatus[0].cases);
+        
+      });
+     
+
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 }
 
 function convertDateTime(date) {
