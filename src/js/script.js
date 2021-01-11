@@ -45,22 +45,29 @@ function covidStateSearch(state) {
       console.log("Casos: " + res.cases.toLocaleString("pt-BR"));
       console.log("Mortes: " + res.deaths.toLocaleString("pt-BR"));
       console.log("Suspeitos: " + res.suspects.toLocaleString("pt-BR"));
-      console.log("Data: " + convertDate(res.datetime));
+      console.log("Data: " + convertDateTime(res.datetime));
     })
     .catch(function (error) {
       console.log(error);
     });
 }
 
-function convertDate(date) {
+function convertDateTime(date) {
   var data = new Date(date);
   var day = data.getDate().toString();
   var dayRes = day.length === 1 ? "0" + day : day;
   var month = data.getMonth().toString() + 1;
   var monthRes = month.length === 1 ? "0" + month : month;
 
+  var seconds = data.getSeconds();
+  var minutes = data.getMinutes().toString();
+  var minutesRes = minutes.length === 1 ? "0" + minutes: minutes; 
+  var hour = data.getHours();
+
   var year = data.getFullYear();
-  data = dayRes + "/" + monthRes + "/" + year;
-  
+  data = dayRes + "/" + monthRes + "/" + year  + " as " + hour + ":" + minutesRes + ":" + seconds; 
+
   return data;
 }
+
+
