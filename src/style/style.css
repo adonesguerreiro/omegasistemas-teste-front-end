@@ -1,15 +1,30 @@
 *{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color:black
 }
 body{
-  background-color: #71ec;
+  background-color: #7159c1;
 }
 
 #container {
+  display: flex;
   justify-content: center;
+  width: 100%;
 }
 
-#states {
+select {
+  width: 100%;
+  margin-bottom: 20px;
+  height: 30px;
+  border: 1px solid rgb(219, 219, 219);
+  border-radius: 5px;
+  word-break: break-word;
+}
+
+#states{
   margin-top: 25%;
+  width: 50%;
+  height: 6vh;
+  border-radius: 5px;
 }
 
