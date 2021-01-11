@@ -16,12 +16,12 @@ function stateSearch() {
   request
     .then((res) => {
       var optionData = `<option value="" selected>Selecione um estado</option>`;
+      optionData += optionAll;
       optionData += res.map((states) => {
         return `<option value=${states.sigla}>${states.nome}</option>`;
       });
-
-      var optionAll = `<option value="todos">Listar o estado com maior numeros de casos, mortes e suspeitos</option>`;
-      optionData += optionAll;
+      
+      var optionAll = `<option value="todos">Todos</option>`;
       var optionState = document.querySelector("#states");
       optionState.innerHTML = optionData;
 
