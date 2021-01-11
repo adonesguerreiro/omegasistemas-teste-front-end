@@ -1,6 +1,6 @@
-// window.onload() = function() {
-//    stateSearch();
-// }
+window.onload = function () {
+  stateSearch();
+};
 
 async function requestApi(url, option) {
   const response = await axios(url, option);
@@ -44,11 +44,23 @@ function covidStateSearch(state) {
     .then((res) => {
       console.log("Casos: " + res.cases.toLocaleString("pt-BR"));
       console.log("Mortes: " + res.deaths.toLocaleString("pt-BR"));
-      console.log("Suspeitos " + res.suspects.toLocaleString("pt-BR"));
+      console.log("Suspeitos: " + res.suspects.toLocaleString("pt-BR"));
+      console.log("Data: " + convertDate(res.datetime));
     })
     .catch(function (error) {
       console.log(error);
     });
 }
 
-stateSearch();
+function convertDate(date) {
+  var data = new Date(date);
+  var day = data.getDate().toString();
+  var dayRes = day.length === 1 ? "0" + day : day;
+  var month = data.getMonth().toString() + 1;
+  var monthRes = month.length === 1 ? "0" + month : month;
+
+  var year = data.getFullYear();
+  data = dayRes + "/" + monthRes + "/" + year;
+  
+  return data;
+}
