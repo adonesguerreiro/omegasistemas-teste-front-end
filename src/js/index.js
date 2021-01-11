@@ -16,13 +16,12 @@ function stateSearch() {
   request
     .then((res) => {
       var optionData = `<option value="" selected>Selecione um estado</option>`;
+      var optionAll = `<option value="todos">Todos</option>`;
       optionData += optionAll;
       optionData += res.map((states) => {
         return `<option value=${states.sigla}>${states.nome}</option>`;
       });
-      
-      var optionAll = `<option value="todos">Todos</option>`;
-      var optionState = document.querySelector("#states");
+      var optionState = document.querySelector("#covidstates");
       optionState.innerHTML = optionData;
 
       optionState.addEventListener("change", function (e) {
