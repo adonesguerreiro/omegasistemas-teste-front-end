@@ -62,7 +62,7 @@ function covidStateSearchStatus() {
   var data;
   request.then((res) => {
     data = res.data.map((status) => {
-      var dataList = [{
+      var dataStatus = [{
          "uf":status.uf,
          "state": status.state.toLocaleString("pt-BR"),
          "cases": status.cases.toLocaleString("pt-BR"),
@@ -70,7 +70,7 @@ function covidStateSearchStatus() {
          "suspects": status.suspects.toLocaleString("pt-BR"),
          "date": convertDateTime(status.datetime)
       }]
-      return console.log(dataList);
+      return console.log(dataStatus);
     })
      
   }).catch(function (error){
