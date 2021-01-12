@@ -21,7 +21,7 @@ body {
   margin-bottom: 20px;
   border-radius: 5px;
   word-break: break-word;
-  width: 80%;
+  width: 85%;
   height: 6vh;
 }
 
@@ -51,14 +51,26 @@ h3 {
 
 @media only screen and (min-width: 320px) and (max-width: 768px){
   section {
-    padding: 60px;
+    padding: 90px;
+   
   }
-  label {
-    font-size: 12pt;
+  label, h3 {
+    font-size: 10pt;
   }
   
-  select {
-    height: 30%;
+  button {
+    width: 100%;
   }
  
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1280px){
+  section {
+    padding: 45px;
+  }
+  
+  img {
+    height: 100px;
+    width: 100px;
+  }
 }
