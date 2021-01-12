@@ -49,26 +49,25 @@ h3 {
   color: white;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 768px){
+@media only screen and (min-width: 320px) and (max-width: 768px) {
   section {
     padding: 90px;
-   
   }
-  label, h3 {
+  label,
+  h3 {
     font-size: 10pt;
   }
-  
+
   button {
     width: 100%;
   }
- 
 }
 
-@media only screen and (min-width: 1024px) and (max-width: 1280px){
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
   section {
     padding: 45px;
   }
-  
+
   img {
     height: 100px;
     width: 100px;
