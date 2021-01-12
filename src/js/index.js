@@ -21,14 +21,18 @@ function stateSearch() {
       });
 
       var buttonState = document.querySelector("#covidsearch");
+      
       var optionState = document.querySelector("#covidstates");
       optionState.innerHTML = optionData;
-
+      
       buttonState.addEventListener("click", function (e) {
         e.preventDefault();
-        if (optionState.value != "" && optionState.value != "todos") {
+        if (optionState.value != "") {
           covidStateSearch(optionState.value);
-        } 
+        }
+        else {
+          alert('Deve selecionar um estado antes de prosseguir');
+        }
       });
     })
     .catch(function (error) {
