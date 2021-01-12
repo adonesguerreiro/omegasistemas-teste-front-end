@@ -12,26 +12,15 @@
   background-color: rgba(0,0,0,0.8);
 }
 
-
 .covid-modal {
   background-color: #7d69cb;
   padding: 20px;
-  display: inline-table;
+  display: inline-block;
   border-radius: 15px;
   box-shadow: 1px 1px 1px 1px black;
-  margin:auto;
-}
-
-.covid-close {
-  font-size: 28px;
-  font-weight: bold;
-  background: transparent;
-  display: flex;
-  justify-content: flex-end;
 }
 
 .covid-close:hover {
-  color: black;
   cursor: pointer;
 }
 
@@ -40,9 +29,6 @@ p {
   font-size: 12pt;
   font-weight: 500;
   width: 100%;
-  margin-bottom: 20px;
-  height: 30px;
-  margin-right: 5px;
   border-radius: 5px;
 }
 

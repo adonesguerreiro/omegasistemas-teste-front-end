@@ -50,7 +50,6 @@ function covidStateSearch(state) {
     .then((res) => {
       var modal = `
       <div class="covid-modal">
-      <span class="covid-close">&times;</span>
        ${img}
       <p>Estado: ${res.data.state.toLocaleString("pt-BR")}</p>
       <p>Casos: ${res.data.cases.toLocaleString("pt-BR")}</p>
@@ -64,11 +63,15 @@ function covidStateSearch(state) {
       console.log(error);
     });
 
-  
-    modalCovid = document.querySelector('#modal');
+    var modal = document.querySelector('#modal');
     modal.style.display = 'block';
-  
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    }
 
+		
 }
 
 function covidStateSearchStatus() {
