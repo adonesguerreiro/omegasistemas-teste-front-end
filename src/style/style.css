@@ -10,7 +10,7 @@ body {
 
 #covidpage {
   border-radius: 15px;
-  box-shadow: 2px 2px 2px 2px black;
+  box-shadow: 1px 1px 1px 1px black;
   width: 40%;
   background-color: #7d69cb;
   justify-content: center;
@@ -36,6 +36,11 @@ label {
   color: white;
   font-size: 14pt;
   font-weight: 500;
+}
+
+button {
+  background-color: #7d69cb;
+  width: 20%;
 }
 
 h3 {

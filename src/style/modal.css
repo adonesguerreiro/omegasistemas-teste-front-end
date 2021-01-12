@@ -1,0 +1,36 @@
+
+.modal-content {
+  background-color: #7d69cb;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 1px 1px 1px 1px black;
+}
+
+.close {
+  font-size: 28px;
+  font-weight: bold;
+  background: transparent;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close:hover {
+  color: black;
+  cursor: pointer;
+}
+
+p {
+  color: white;
+  font-size: 14pt;
+  font-weight: 500;
+  width: 100%;
+  margin-bottom: 20px;
+  height: 30px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+#covidflag {
+  width: 40px;
+  height: 40px;
+}
