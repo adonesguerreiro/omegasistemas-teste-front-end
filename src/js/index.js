@@ -16,8 +16,6 @@ function stateSearch() {
   request
     .then((res) => {
       var optionData = `<option value="" selected>Selecione um estado</option>`;
-      var optionAll = `<option value="todos">Todos</option>`;
-      optionData += optionAll;
       optionData += res.data.map((states) => {
         return `<option value=${states.sigla}>${states.nome}</option>`;
       });
@@ -30,9 +28,7 @@ function stateSearch() {
         e.preventDefault();
         if (optionState.value != "" && optionState.value != "todos") {
           covidStateSearch(optionState.value);
-        } else if (optionState.value === "todos") {
-          covidStateSearchStatus();
-        }
+        } 
       });
     })
     .catch(function (error) {
@@ -46,77 +42,33 @@ function covidStateSearch(state) {
   const request = requestApi(url);
 
   var modalCovid = document.querySelector("#modal");
+
   request
     .then((res) => {
       var modal = `
       <div class="covid-modal">
-       ${img}
-      <p>Estado: ${res.data.state.toLocaleString("pt-BR")}</p>
-      <p>Casos: ${res.data.cases.toLocaleString("pt-BR")}</p>
-      <p>Mortes: ${res.data.deaths.toLocaleString("pt-BR")}</p>
-      <p>Suspeitos: ${res.data.suspects.toLocaleString("pt-BR")}</p>
-      <p>Última Atualização: ${convertDateTime(res.data.datetime)}</p>
-     </div>`;
-     modalCovid.innerHTML = modal;
+      ${img}
+     <p>Estado: ${res.data.state.toLocaleString("pt-BR")}</p>
+     <p>Casos: ${res.data.cases.toLocaleString("pt-BR")}</p>
+     <p>Mortes: ${res.data.deaths.toLocaleString("pt-BR")}</p>
+     <p>Suspeitos: ${res.data.suspects.toLocaleString("pt-BR")}</p>
+     <p>Última Atualização: ${convertDateTime(res.data.datetime)}</p>
+    </div>`;
+      modalCovid.innerHTML = modal;
     })
     .catch(function (error) {
       console.log(error);
     });
 
-    var modal = document.querySelector('#modal');
-    modal.style.display = 'block';
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = 'none';
-      }
+  var modal = document.querySelector("#modal");
+  modal.style.display = "block";
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
     }
-
-		
-}
-
-function covidStateSearchStatus() {
-  var url = `https://covid19-brazil-api.now.sh/api/report/v1/`;
-  const request = requestApi(url);
-
-  let dataCovid = {
-    caso: {
-      estado: "",
-      quantidade: 0,
-    },
-    suspeito: {
-      estado: "",
-      quantidade: 0,
-    },
-    mortos: {
-      estado: "",
-      quantidade: 0,
-    },
   };
-
-  request.then((res) => {
-    res.data
-      .map((covid) => {
-        if (dataCovid.caso.quantidade < covid.cases) {
-          dataCovid.caso.estado = covid.state;
-          dataCovid.caso.quantidade = covid.cases;
-        }
-        if (dataCovid.suspeito.quantidade < covid.suspects) {
-          dataCovid.suspeito.estado = covid.state;
-          dataCovid.suspeito.quantidade = covid.suspects;
-        }
-        if (dataCovid.mortos.quantidade < covid.deaths) {
-          dataCovid.mortos.estado = covid.state;
-          dataCovid.mortos.quantidade = covid.deaths;
-        }
-
-        console.log("covid:" + dataCovid);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  });
-
 }
+
 function covidStateFlag(uf) {
   var url = `https://devarthurribeiro.github.io/covid19-brazil-api/static/flags/${uf}.png`;
 
