@@ -52,6 +52,7 @@ function covidStateSearch(state) {
       <div class="covid-modal">
       <span class="covid-close">&times;</span>
        ${img}
+      <p>Estado: ${res.data.state.toLocaleString("pt-BR")}</p>
       <p>Casos: ${res.data.cases.toLocaleString("pt-BR")}</p>
       <p>Mortes: ${res.data.deaths.toLocaleString("pt-BR")}</p>
       <p>Suspeitos: ${res.data.suspects.toLocaleString("pt-BR")}</p>
@@ -65,15 +66,8 @@ function covidStateSearch(state) {
 
   
     modalCovid = document.querySelector('#modal');
-    modal.style.display = 'flex';
-    var btnClose = document.querySelector('.covid-close');
-
-    btnClose.addEventListener("click", function (event) {
-      event.preventDefault();
-      modal.style.display = 'none';
-    });
-
-   
+    modal.style.display = 'block';
+  
 
 }
 
