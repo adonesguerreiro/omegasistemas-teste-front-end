@@ -5,14 +5,18 @@
 body {
   background-color: #7159c1;
   text-align: center;
+  display: flex;
 }
 
 #covidpage {
   border-radius: 15px;
   box-shadow: 2px 2px 2px 2px black;
   width: 40%;
-  margin: 10% 0% 0% 22%;
   background-color: #7d69cb;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  bottom: 0;
 }
 
 #covidstates {
@@ -28,7 +32,7 @@ img {
   height: 80px;
 }
 
-label{
+label {
   color: white;
   font-size: 14pt;
   font-weight: 500;
@@ -36,4 +40,10 @@ label{
 
 h3 {
   color: white;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 1280px) {
+  form {
+    margin: 10px;
+  }
 }

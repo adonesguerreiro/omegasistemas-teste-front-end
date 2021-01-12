@@ -5,7 +5,52 @@ window.onload = function () {
 async function requestApi(url, option) {
   const response = await axios(url, option);
 
-  return response.data;
+  return response;
+}
+
+const testeDados = {
+  data: [
+    {
+      "uid": 35,
+      "uf": "SP",
+      "state": "São Paulo",
+      "cases": 154,
+      "deaths": 4,
+      "suspects": 5,
+      "refuses": 596,
+      "datetime": "2021-01-09T23:06:21.561Z"
+    },
+    {
+      "uid": 31,
+      "uf": "MG",
+      "state": "Minas Gerais",
+      "cases": 587868,
+      "deaths": 12594,
+      "suspects": 925,
+      "refuses": 104,
+      "datetime": "2021-01-09T23:06:21.561Z"
+    },
+    {
+      "uid": 42,
+      "uf": "SC",
+      "state": "Santa Catarina",
+      "cases": 518805,
+      "deaths": 5611,
+      "suspects": 346,
+      "refuses": 47,
+      "datetime": "2021-01-09T23:06:21.561Z"
+    },
+    {
+      "uid": 29,
+      "uf": "BA",
+      "state": "Bahia",
+      "cases": 511192,
+      "deaths": 9392,
+      "suspects": 573,
+      "refuses": 36,
+      "datetime": "2021-01-09T23:06:21.561Z"
+    },
+  ]
 }
 
 function stateSearch() {
@@ -18,13 +63,15 @@ function stateSearch() {
       var optionData = `<option value="" selected>Selecione um estado</option>`;
       var optionAll = `<option value="todos">Todos</option>`;
       optionData += optionAll;
-      optionData += res.map((states) => {
+      optionData += res.data.map((states) => {
         return `<option value=${states.sigla}>${states.nome}</option>`;
       });
+
+      var buttonState = document.querySelector("#search");
       var optionState = document.querySelector("#covidstates");
       optionState.innerHTML = optionData;
 
-      optionState.addEventListener("change", function (e) {
+      buttonState.addEventListener("click", function (e) {
         e.preventDefault();
         if (optionState.value != "" && optionState.value != "todos") {
           covidStateSearch(optionState.value);
@@ -40,15 +87,20 @@ function stateSearch() {
 
 function covidStateSearch(state) {
   var url = `https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/${state}`;
+  var img = covidStateFlag(state);
   const request = requestApi(url);
 
   request
     .then((res) => {
+      
+      
+
+
       console.log(res);
-      console.log("Casos: " + res.cases.toLocaleString("pt-BR"));
-      console.log("Mortes: " + res.deaths.toLocaleString("pt-BR"));
-      console.log("Suspeitos: " + res.suspects.toLocaleString("pt-BR"));
-      console.log("Data: " + convertDateTime(res.datetime));
+      console.log("Casos: " + res.data.cases.toLocaleString("pt-BR"));
+      console.log("Mortes: " + res.data.deaths.toLocaleString("pt-BR"));
+      console.log("Suspeitos: " + res.data.suspects.toLocaleString("pt-BR"));
+      console.log("Data: " + convertDateTime(res.data.datetime));
     })
     .catch(function (error) {
       console.log(error);
@@ -56,34 +108,36 @@ function covidStateSearch(state) {
 }
 
 function covidStateSearchStatus() {
-  var url = `https://covid19-brazil-api.now.sh/api/report/v1/`;
-  const request = requestApi(url);
-  var data;
-  request
-    .then((res) => {
-      data = res.data.map((status) => {
-        var dataStatus = [
-          {
-            
-            state: status.state,
-            cases: status.cases,
-            deaths: status.deaths,
-            suspects: status.suspects,
-            uid: status.uid,
-            uf: status.uf,
-          },
-        ]
-     
-        return console.log(dataStatus[0].cases);
-        
-      });
-     
+  // var url = `https://covid19-brazil-api.now.sh/api/report/v1/`;
 
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  // const request = requestApi(url);
+  // var dataCovid;
+  // dataCovid = request
+  //   .then((res) => console.log(res.data))
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+
+
+  console.log(testeDados.data);
+  var max = testeDados.reduce((a) => {
+    return console.log(Math.max(a));
+  });
+
+    // console.log(dataCovid);
+
 }
+
+function covidStateFlag(uf) {
+  var url = `https://devarthurribeiro.github.io/covid19-brazil-api/static/flags/${uf}.png`;
+
+   var img = `<img src=${url} >`;
+
+   return img;
+}
+
+
+
 
 function convertDateTime(date) {
   var data = new Date(date);
@@ -105,7 +159,7 @@ function convertDateTime(date) {
     monthRes +
     "/" +
     year +
-    " as " +
+    " às " +
     hour +
     ":" +
     minutesRes +
