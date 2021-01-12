@@ -1,4 +1,18 @@
 
+
+#modal {
+  
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+ 
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
 .covid-modal {
   background-color: #7d69cb;
   padding: 20px;
@@ -6,7 +20,7 @@
   box-shadow: 1px 1px 1px 1px black;
 }
 
-.close {
+.covid-close {
   font-size: 28px;
   font-weight: bold;
   background: transparent;
@@ -14,14 +28,14 @@
   justify-content: flex-end;
 }
 
-.close:hover {
+.covid-close:hover {
   color: black;
   cursor: pointer;
 }
 
 p {
   color: white;
-  font-size: 14pt;
+  font-size: 12pt;
   font-weight: 500;
   width: 100%;
   margin-bottom: 20px;
@@ -30,7 +44,7 @@ p {
   border-radius: 5px;
 }
 
-#covidflag {
-  width: 40px;
-  height: 40px;
+#covid-flag {
+  width: 45px;
+  height: 30px;
 }

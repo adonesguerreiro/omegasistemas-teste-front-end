@@ -45,81 +45,85 @@ function covidStateSearch(state) {
   var img = covidStateFlag(state);
   const request = requestApi(url);
 
-
   var modalCovid = document.querySelector("#modal");
   request
     .then((res) => {
       var modal = `
-      
       <div class="covid-modal">
-      <span class="close">&times;</span>
+      <span class="covid-close">&times;</span>
        ${img}
       <p>Casos: ${res.data.cases.toLocaleString("pt-BR")}</p>
       <p>Mortes: ${res.data.deaths.toLocaleString("pt-BR")}</p>
       <p>Suspeitos: ${res.data.suspects.toLocaleString("pt-BR")}</p>
       <p>Última Atualização: ${convertDateTime(res.data.datetime)}</p>
      </div>`;
-     modalCovid.innerHTML=modal;
+     modalCovid.innerHTML = modal;
     })
     .catch(function (error) {
       console.log(error);
     });
+
+  
+    modalCovid = document.querySelector('#modal');
+    modal.style.display = 'flex';
+    var btnClose = document.querySelector('.covid-close');
+
+    btnClose.addEventListener("click", function (event) {
+      event.preventDefault();
+      modal.style.display = 'none';
+    });
+
+   
+
 }
 
 function covidStateSearchStatus() {
+  var url = `https://covid19-brazil-api.now.sh/api/report/v1/`;
+  const request = requestApi(url);
 
-   var url = `https://covid19-brazil-api.now.sh/api/report/v1/`;
-   const request = requestApi(url);
-   
-   let dataCovid =
-   {
-       caso: {
-           estado: '',
-           quantidade: 0,
-       },
-       suspeito:{
-           estado: '',
-           quantidade: 0,
-       },
-       mortos: {
-           estado: '',
-           quantidade: 0,
-       }
-   };
+  let dataCovid = {
+    caso: {
+      estado: "",
+      quantidade: 0,
+    },
+    suspeito: {
+      estado: "",
+      quantidade: 0,
+    },
+    mortos: {
+      estado: "",
+      quantidade: 0,
+    },
+  };
 
-    request
-     .then((res) => {
-    
-     res.data.map((covid) => {        
-       
-        if (dataCovid.caso.quantidade < covid.cases){
-            dataCovid.caso.estado = covid.state;
-            dataCovid.caso.quantidade = covid.cases;
+  request.then((res) => {
+    res.data
+      .map((covid) => {
+        if (dataCovid.caso.quantidade < covid.cases) {
+          dataCovid.caso.estado = covid.state;
+          dataCovid.caso.quantidade = covid.cases;
         }
-        if (dataCovid.suspeito.quantidade < covid.suspects){
-            dataCovid.suspeito.estado = covid.state;
-            dataCovid.suspeito.quantidade = covid.suspects;
+        if (dataCovid.suspeito.quantidade < covid.suspects) {
+          dataCovid.suspeito.estado = covid.state;
+          dataCovid.suspeito.quantidade = covid.suspects;
         }
-        if (dataCovid.mortos.quantidade < covid.deaths){
-            dataCovid.mortos.estado = covid.state;
-            dataCovid.mortos.quantidade = covid.deaths;
+        if (dataCovid.mortos.quantidade < covid.deaths) {
+          dataCovid.mortos.estado = covid.state;
+          dataCovid.mortos.quantidade = covid.deaths;
         }
 
         console.log("covid:" + dataCovid);
-     })
-     .catch(function (error) {
-       console.log(error);
-     });
-    
-});
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
 
-   
 }
-
 function covidStateFlag(uf) {
   var url = `https://devarthurribeiro.github.io/covid19-brazil-api/static/flags/${uf}.png`;
 
-  var img = `<img src=${url} id="covidflag">`;
+  var img = `<img src=${url} id="covid-flag">`;
 
   return img;
 }
