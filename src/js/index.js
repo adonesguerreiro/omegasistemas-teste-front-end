@@ -51,7 +51,7 @@ function covidStateSearch(state) {
     .then((res) => {
       var modal = `
       
-      <div class="modal-content">
+      <div class="covid-modal">
       <span class="close">&times;</span>
        ${img}
       <p>Casos: ${res.data.cases.toLocaleString("pt-BR")}</p>

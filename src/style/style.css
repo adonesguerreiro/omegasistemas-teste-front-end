@@ -17,6 +17,7 @@ body {
   align-items: center;
   margin: auto;
   bottom: 0;
+  height: 45vh;
 }
 
 #covidstates {
@@ -39,8 +40,12 @@ label {
 }
 
 button {
-  background-color: #7d69cb;
-  width: 20%;
+  background-color: #5337c5;
+  width: 30%;
+  border-radius: 5px;
+  height: 5vh;
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 h3 {
